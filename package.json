@@ -1,0 +1,28 @@
+{
+  "name": "grapql_be",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NARENDRA88159/GrapQl_be.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NARENDRA88159/GrapQl_be/issues"
+  },
+  "homepage": "https://github.com/NARENDRA88159/GrapQl_be#readme",
+  "description": "",
+  "dependencies": {
+    "@apollo/server": "^4.12.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.1.0",
+    "express": "^5.1.0",
+    "graphql": "^16.11.0",
+    "http": "^0.0.1-security",
+    "nodemon": "^3.1.10"
+  }
+}
