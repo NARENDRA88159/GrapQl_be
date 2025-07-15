@@ -1,14 +1,14 @@
 const User = require("../Moduls/User.js");
 
 const SignUp = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password,phone,address,role } = req.body;
 
   const existUser = await User.findOne({ email });
   if (existUser) {
     return res.status(400).json({ message: "User already exists" });
   }
 
-  const newUser = new User({ name, email, password });
+  const newUser = new User({ name, email, password, });
   await newUser.save();
 
   res.status(201).json({ message: "SignUp successful" });
@@ -25,4 +25,9 @@ const GetallUser = async (req, res) => {
   }
 };
 
-module.exports = { SignUp,GetallUser };
+const GetallUserInGraph= async() => {
+        const users= await User.find()
+         return users
+      }
+
+module.exports = { SignUp,GetallUser,GetallUserInGraph };

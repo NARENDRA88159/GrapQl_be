@@ -5,8 +5,12 @@ services:
     ports:
       - 8003:8003
       - 4000:4000
+    volumes:
+      - .:/app   # 👈 This allows live code reflection
+      - /app/node_modules  # Avoid overwriting node_modules
     environment:
       - MONGO_URI=mongodb://admin:admin@mongo:27017
+    command: npm run dev 
     depends_on:
       - mongo
 
