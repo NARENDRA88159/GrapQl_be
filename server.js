@@ -5,8 +5,12 @@ const { schema } = require("./GrapQl/Schema.js");
 const connectDB = require("./db.js");
 const express = require("express");
 const userRouter = require("./Routes/User.js");
+const ReastaurantRouter = require("./Routes/Reastaurant.js");
 const http = require("http");
-const cors =require("cors")
+const cors =require("cors");
+const multer = require('multer');
+const User = require("./Moduls/User.js");
+const { GetallUserInGraph } = require("./Controler/User.js");
 
 dotenv.config();
 connectDB();
@@ -16,7 +20,14 @@ const apiserver = http.createServer(app);
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// set up multer
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+
 app.use("/api/user", userRouter);
+app.use("/api/reasturant", ReastaurantRouter);
 
 // app.get("/",async()=>{
 //     "helllo"
@@ -31,7 +42,9 @@ const server = new ApolloServer({
   typeDefs: schema,
   resolvers: {
     Query: {
-      hello: () => "hellohiinn",
+      userName:GetallUserInGraph,
+
+       
     },
   },
 });
