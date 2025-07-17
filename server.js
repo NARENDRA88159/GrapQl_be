@@ -6,11 +6,17 @@ const connectDB = require("./db.js");
 const express = require("express");
 const userRouter = require("./Routes/User.js");
 const ReastaurantRouter = require("./Routes/Reastaurant.js");
+const MenuRouter = require("./Routes/Menu.js");
 const http = require("http");
 const cors =require("cors");
 const multer = require('multer');
 const User = require("./Moduls/User.js");
 const { GetallUserInGraph } = require("./Controler/User.js");
+const swaggerUi  = require("swagger-ui-express");
+const swaggerDocs = require("./swagger-output.json");
+const { getallreastaurantGrapQl } = require("./Controler/Reastaurant.js");
+const { getAllMenuItemsInGraphQL } = require("./Controler/Menu.js");
+const Reastaurant = require("./Moduls/Reastaurant.js");
 
 dotenv.config();
 connectDB();
@@ -25,9 +31,10 @@ app.use(express.urlencoded({ extended: true }));
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs)); // Serve Swagger UI
 app.use("/api/user", userRouter);
 app.use("/api/reasturant", ReastaurantRouter);
+app.use("/api/reasturant", MenuRouter);
 
 // app.get("/",async()=>{
 //     "helllo"
@@ -43,9 +50,18 @@ const server = new ApolloServer({
   resolvers: {
     Query: {
       userName:GetallUserInGraph,
+      Restaurant:getallreastaurantGrapQl,
+      MenuItems:getAllMenuItemsInGraphQL,
+      
 
        
     },
+    Menu: {
+    restaurant: async (parent) => {
+      // parent.restaurantId holds the ObjectId of the restaurant
+      return await Reastaurant.findById(parent.restaurantId);
+    }
+  }
   },
 });
 

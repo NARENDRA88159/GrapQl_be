@@ -28,6 +28,9 @@
     "mongoose": "^8.16.2",
     "multer": "^2.0.1",
     "streamifier": "^0.1.1",
+    "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "your-library-name": "^1.0.0"
   },
   "devDependencies": {
