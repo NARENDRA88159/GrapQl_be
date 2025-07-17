@@ -40,4 +40,13 @@ const ReastaurantSignUp = async (req, res) => {
   res.status(201).json({ message: " Reastaurant SignUp successful" });
 };
 
-module.exports={ReastaurantSignUp}
+const getallreastaurant=async(req,res)=>{
+  const allreasto= await Reastaurant.find();
+  return res.status(200).json({data:allreasto})
+}
+const getallreastaurantGrapQl=async(req,res)=>{
+  const allreasto= await Reastaurant.find();
+  return allreasto
+}
+
+module.exports={ReastaurantSignUp,getallreastaurant,getallreastaurantGrapQl}
